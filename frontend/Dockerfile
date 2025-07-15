@@ -1,8 +1,15 @@
 # Frontend Dockerfile
-FROM node:18-alpine
+FROM node:18-slim
 
 # Set working directory
 WORKDIR /app
+
+# Install necessary system dependencies for lightningcss
+RUN apt-get update && apt-get install -y \
+    python3 \
+    make \
+    g++ \
+    && rm -rf /var/lib/apt/lists/*
 
 # Copy package files
 COPY package*.json ./
